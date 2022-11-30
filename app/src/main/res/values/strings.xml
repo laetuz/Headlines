@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Headlines</string>
+
+    <string name="tv_dialog">Exit application?</string>
+    <string name="btn_dialog_ya">Yes</string>
+    <string name="btn_dialog_tidak">No</string>
+</resources>
