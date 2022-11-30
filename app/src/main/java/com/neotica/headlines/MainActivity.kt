@@ -111,6 +111,8 @@ class MainActivity : AppCompatActivity() {
         //Step 52: Set the layoutManager of the recyclerView to a LinearLayoutManager
         // and pass the context to this@MainActivity
         layoutManager = LinearLayoutManager(this@MainActivity)
+        (layoutManager as LinearLayoutManager).stackFromEnd = true
+        (layoutManager as LinearLayoutManager).reverseLayout = true
     }
 
    /* private fun refresh(){
