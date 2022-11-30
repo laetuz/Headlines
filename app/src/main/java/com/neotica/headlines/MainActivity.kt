@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var todoAdapter: TodoAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         onBackPressedDispatcher.addCallback(this@MainActivity,object :OnBackPressedCallback(true){
             override fun handleOnBackPressed(){
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+
         //Step 46: Initialize the binding here
         binding = ActivityMainBinding.inflate(layoutInflater)
         //Step 47: Change the parameter inside setContentView into binding.root
@@ -48,6 +48,25 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
 
         //Step 54: Setup api request on a background thread using lifecycleScope (coroutineScope)
+        lifecycleScope1()
+
+        binding.btnRefresh.setOnClickListener{
+            lifecycleScope1()
+        }
+
+        binding.btnRefresh.setOnLongClickListener {
+            Log.d(
+                "Refresh-long-click",
+                "User long clicked the refresh button, activity restarted."
+            )
+            finish()
+            startActivity(intent)
+            true }
+
+
+
+    }
+    fun lifecycleScope1(){
         lifecycleScope.launchWhenCreated {
             //Step 55: set the progress bar visibility to true
             binding.progressBar.isVisible = true
@@ -83,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.isVisible = false
         }
     }
+
     private fun setupRecyclerView() = binding.rvTodo.apply {
         //Step 50: Set todoAdapter to a new TodoAdapter
         todoAdapter = TodoAdapter()
@@ -92,6 +112,10 @@ class MainActivity : AppCompatActivity() {
         // and pass the context to this@MainActivity
         layoutManager = LinearLayoutManager(this@MainActivity)
     }
+
+   /* private fun refresh(){
+        binding.btnRefresh.setOnClickListener(){respo}
+    }*/
 
 
 }
